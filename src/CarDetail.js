@@ -1,20 +1,25 @@
 import axios from "axios";
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
+import useAxios from "./hooks/useAxios";
 
 export default function CarDetail() {
   const params = useParams();
   const [detail, setDetail] = useState();
-
-  useEffect(() => {
-    // console.log(params);
-    // axios.get(`https://rent-cars-api.herokuapp.com/customer/car/${params.id}`)
-    //   .then((response) => {
-        
-    //   })
-  }, [params]);
+  const { loading, response: { data }, error } = useAxios(`https://rent-cars-api.herokuapp.com/customer/car/${params.id}`);
 
   return (
-    <div>Car Detail</div>
+    <div>
+      {/* {loading && <div>Loading...</div>}
+      {error && <div>{error}</div>}
+      {(!loading && !error) && (
+        <>
+          <div>Car Detail</div>
+          <img src={data.image} alt={data.name} width="500"/>
+          <div>{data.name}</div>
+          <div>{data.price}</div>
+        </>
+      )} */}
+    </div>
   )
 }

@@ -5,7 +5,7 @@ import useAxios from './hooks/useAxios';
 
 export default function CarList() {
   const navigate = useNavigate();
-  const { loading, response, error } = useAxios('https://jsonplaceholder.typicode.com/posts');
+  const { loading, response, error } = useAxios('https://rent-cars-api.herokuapp.com/customer/car');
 
   const handleClick = (id) => {
     navigate(`/detail/${id}`);
@@ -15,19 +15,16 @@ export default function CarList() {
     <div>
       <h3>Car List</h3>
       <ol>
-        {!loading && (
-          response.data.map((post) => (
-            <li>{post.title}</li>
-          ))
-        ) }
-        {/* {carList.map((car) => (
+        {loading && <div>Loading...</div>}
+        {error && <div>{error.message}</div>}
+        {!loading && response.data.map((car) => (
           // <Link to={`/detail/{car.id}`}>
-          <li key={car.id} onClick={handleClick(car.id)}>
+          <li key={car.id} onClick={() => handleClick(car.id)}>
             <div>{car.name}</div>
             <img src={car.image} alt={car.name} width="300"/>
           </li>
           // </Link>
-        ))} */}
+        ))}
       </ol>
     </div>
   )

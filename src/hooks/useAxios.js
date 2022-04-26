@@ -3,22 +3,25 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useAxios(url) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState({});
   const [error, setError] = useState({});
 
   useEffect(() => {
     setLoading(true);
-    axios.get(url)
-      .then((response) => {
-        setLoading(false);
+    async function getData() {
+      try {
+        const response = await axios.get(url);
         setResponse(response);
-      })
-      .catch((error) => {
         setLoading(false);
+      } catch (error) {
         setError(error);
-      });
-  }, []);
+        setLoading(false);
+      }
+    }
+
+    getData();
+  }, [url]);
 
   return { loading, response, error };
 }
