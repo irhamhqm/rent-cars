@@ -16,8 +16,8 @@ export default function CarList() {
       <h3>Car List</h3>
       <ol>
         {loading && <div>Loading...</div>}
-        {error && <div>{error.message}</div>}
-        {!loading && response.data.map((car) => (
+        {error && <div>{error}</div>}
+        {(!loading && !error) && response.data.map((car) => (
           // <Link to={`/detail/{car.id}`}>
           <li key={car.id} onClick={() => handleClick(car.id)}>
             <div>{car.name}</div>

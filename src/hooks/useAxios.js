@@ -5,7 +5,7 @@ import axios from "axios";
 export default function useAxios(url) {
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState({});
-  const [error, setError] = useState({});
+  const [error, setError] = useState('');
 
   useEffect(() => {
     setLoading(true);
